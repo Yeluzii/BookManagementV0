@@ -10,6 +10,7 @@
 <html lang="en">
 
 <head>
+    <script src="./js/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -27,7 +28,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url("./images/IMG_5811(20240524-203904).JPEG");
+            background-image: url("images/background.JPEG");
         }
 
         header {
@@ -110,6 +111,7 @@
 </header>
 
 <nav2>
+    <img src="<%=session.getAttribute("avatar")%>" alt="头像">
     <button class="place" href="/personal-center" onclick="showCenter()">个人中心</button>
     <br>
     <button class="place" href="/shop" onclick="showShop()">商城</button>
