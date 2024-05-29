@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.cjw.bookmanagementv0.mapper.RecordMapper">
+    <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.Record">
+        SELECT  r_id,username,name,t_name
+        FROM record,user,book,type
+        WHERE record.u_id = user.u_id
+        AND record.b_id = book.b_id
+        AND book.t_id = type.t_id
+    </select>
+    <select id="selectByUsername" resultType="top.cjw.bookmanagementv0.entity.Record">
+        SELECT  r_id,username,name,t_name
+        FROM record,user,book,type
+        WHERE record.u_id = user.u_id
+          AND record.b_id = book.b_id
+          AND book.t_id = type.t_id
+          AND username = #{value}
+    </select>
+    <select id="selectByBookName" resultType="top.cjw.bookmanagementv0.entity.Record">
+        SELECT  r_id,username,name,t_name
+        FROM record,user,book,type
+        WHERE record.u_id = user.u_id
+          AND record.b_id = book.b_id
+          AND book.t_id = type.t_id
+          AND name like concat('%',#{name},'%')
+    </select>
+</mapper>

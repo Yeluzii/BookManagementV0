@@ -105,6 +105,7 @@ public class UserServlet extends HttpServlet{
         System.out.println(username + " " + password);
         User user = new User(username,password);
 
+
         String re = req.getParameter("verifyCode");
         String answer = (String) req.getSession().getAttribute("verifyCode");
         System.out.println(re);
@@ -136,9 +137,11 @@ public class UserServlet extends HttpServlet{
         // 将用户信息存储到 Session 中
         HttpSession session = req.getSession();
         session.setAttribute("username", username);
-        assert  user != null;
         session.setAttribute("avatar", user.getAvatar());
         session.setAttribute("password", password);
+        req.setAttribute("avatar",user.getAvatar());
+        req.setAttribute("user",user);
+//        req.getRequestDispatcher("/header.jsp").forward(req,resp);
         resp.sendRedirect("/header.jsp");
     }
 
