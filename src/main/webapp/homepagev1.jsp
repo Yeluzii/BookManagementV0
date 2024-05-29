@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="top.cjw.bookmanagementv0.service.impl.BookServiceImpl" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="top.cjw.bookmanagementv0.service.UserService" %>
+<%@ page import="top.cjw.bookmanagementv0.service.impl.UserServiceImpl" %>
+<%@ page import="top.cjw.bookmanagementv0.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,7 +17,7 @@
     <title>主页</title>
     <style>
         body{
-            background-image:url("./images/background.JPEG");
+            background-image:url("./images/2.jpg");
             background-size: 100% 100%;
         }
         nav{
@@ -44,6 +47,9 @@
             text-align: center;
             background-color: #f3f0f0;
         }
+        .search{
+            text-align: right;
+        }
         .img1{
             margin:auto;
             display: block;
@@ -54,7 +60,11 @@
             height: 100px;
             width: 80px;
         }
-
+        .img3{
+            height: 50px;
+            width: 50px;
+            border-radius: 10px;
+        }
         .box{
             display: inline-block;
             width:36px;
@@ -77,48 +87,46 @@
 
 <nav>
     <form action="<%request.getContextPath();%>/user/logout">
-        <button type="submit">登出</button>
-    </form>
+<%--        <img class="img3" src="${sessionScope.get("avatar")}" alt="头像">--%>
+        <img class="img3" src="/images/p1.jpg" alt="hhh">
     <a href="#" onclick="showHome()">主页</a> |
     <a href="#" onclick="showPersonal()">个人中心</a>|
     <a href="#" onclick="showManage()">后台管理</a>
+    <button type="submit">退出登录</button>
+    </form>
+
 
 </nav>
 
 <section id="home">
 
-    <h2>
-        <img src="https://profile-avatar.csdnimg.cn/a90ef3bb2e7d47deb9dabfe94000acc5_qq_74143974.jpg!1" alt="头像">
-        <%= session.getAttribute("username")%>登录成功
-    </h2>
 
     <div>
-        <form action="<%request.getContextPath();%>/book/search">
+        全部 | 政治 | 经济 | 文化 | 社会 | 科学
+        <form class="search" action="<%request.getContextPath();%>/book/search">
             <input type="text" placeholder="请输入书名" name="name">
             <button type="submit">搜索</button>
         </form>
     </div>
 
+
+    <div>
     <%
         BookService bookService = new BookServiceImpl();
         List<Book> books = bookService.findAll();
         for (Book book : books) {
     %>
 
-    <div>
-        <%=book.getB_id() %>
+    <span>
+        <img class="img1" src=" <%=book.getCover() %>" alt="无法识别图片">
         <br>
-        <img src="<%=book.getCover()%>" alt="封面" class="avatar">
-        <br>
-        <%=book.getName()%>
-        <br>
-        <%=book.getCount()%>
-    </div>
+        <%=book.getName()%>|库存：<%=book.getCount()%>本
+    </span>
 
     <%
         }
     %>
-
+    </div>
 <%--    <div>--%>
 
 <%--        <c:forEach  items="${Book}" var="book" >--%>
@@ -131,7 +139,7 @@
 <div1 class="box">
     <a href="#">&lt;&lt;上一页</a>
     <a href="#">1</a>
-    <a href="#">&gt;&gt;下一页</a>
+    <a href="#">下一页&gt;&gt;</a>
 </div1>
 
 </section>
