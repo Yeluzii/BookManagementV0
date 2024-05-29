@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import top.cjw.bookmanagementv0.entity.Book;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.BookService;
 import top.cjw.bookmanagementv0.service.UserService;
@@ -17,6 +18,7 @@ import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/book/*")
 @Slf4j
@@ -37,7 +39,6 @@ public class BookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String uri = req.getRequestURI();
         String method = StringUtil.subUri(uri);
-//        login(req, resp);
         switch (method) {
             case "selectAll" -> {
                 showBook(req, resp);
@@ -46,7 +47,6 @@ public class BookServlet extends HttpServlet {
                 searchBook(req, resp);
             }
         }
-
     }
 
     private void searchBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,14 +55,23 @@ public class BookServlet extends HttpServlet {
             showBook(req, resp);
         } else {
             resp.setContentType("text/html;charset=utf-8");
-            resp.getWriter().write(bookService.findByName(name).toString());
+//            resp.getWriter().write(bookService.findByName(name).toString());
+            List<Book> list = bookService.findByName(name);
+            System.out.println(list);
+            req.setAttribute("book-list", list);
+            req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
         }
     }
 
     private void showBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
-        resp.getWriter().write(bookService.findAll().toString());
+//        resp.getWriter().write(bookService.findAll().toString());
+        List<Book> list = bookService.findAll();
+        System.out.println(list);
+        req.setAttribute("book-list", list);
+        req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
     }
+
 
     @Override
     public void destroy() {

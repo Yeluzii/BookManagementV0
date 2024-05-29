@@ -139,7 +139,7 @@ public class UserServlet extends HttpServlet{
         assert  user != null;
         session.setAttribute("avatar", user.getAvatar());
         session.setAttribute("password", password);
-        resp.sendRedirect("/homepagev1.jsp");
+        resp.sendRedirect("/header.jsp");
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="top.cjw.bookmanagementv0.service.impl.BookServiceImpl" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="top.cjw.bookmanagementv0.service.UserService" %>
+<%@ page import="top.cjw.bookmanagementv0.service.impl.UserServiceImpl" %>
+<%@ page import="top.cjw.bookmanagementv0.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -44,17 +47,25 @@
             text-align: center;
             background-color: #f3f0f0;
         }
+        .search{
+            text-align: right;
+        }
         .img1{
             margin:auto;
             display: block;
             height: 200px;
             width: 150px;
+            transform: scale(1.2);
         }
         .img2{
             height: 100px;
             width: 80px;
         }
-
+        .img3{
+            height: 50px;
+            width: 50px;
+            border-radius: 10px;
+        }
         .box{
             display: inline-block;
             width:36px;
@@ -77,63 +88,61 @@
 
 <nav>
     <form action="<%request.getContextPath();%>/user/logout">
-        <button type="submit">登出</button>
-    </form>
+<%--        <img class="img3" src="${sessionScope.get("avatar")}" alt="头像">--%>
+        <img class="img3" src="/images/p1.jpg" alt="hhh">
     <a href="#" onclick="showHome()">主页</a> |
     <a href="#" onclick="showPersonal()">个人中心</a>|
     <a href="#" onclick="showManage()">后台管理</a>
+    <button type="submit">退出登录</button>
+    </form>
+
 
 </nav>
 
 <section id="home">
 
-    <h2>
-        <img src="https://profile-avatar.csdnimg.cn/a90ef3bb2e7d47deb9dabfe94000acc5_qq_74143974.jpg!1" alt="头像">
-        <%= session.getAttribute("username")%>登录成功
-    </h2>
 
     <div>
-        <form action="<%request.getContextPath();%>/book/search">
+        全部 | 政治 | 经济 | 文化 | 社会 | 科学
+        <form class="search" action="<%request.getContextPath();%>/book/search">
             <input type="text" placeholder="请输入书名" name="name">
             <button type="submit">搜索</button>
         </form>
     </div>
 
+
+    <div>
     <%
         BookService bookService = new BookServiceImpl();
         List<Book> books = bookService.findAll();
         for (Book book : books) {
     %>
 
-    <div>
-        <%=book.getB_id() %>
+    <span>
+        <img class="img1" src=" <%=book.getCover() %>" alt="无法识别图片">
         <br>
-        <img src="<%=book.getCover()%>" alt="封面" class="avatar">
-        <br>
-        <%=book.getName()%>
-        <br>
-        <%=book.getCount()%>
-    </div>
+        <%=book.getName()%>|库存：<%=book.getCount()%>本
+    </span>
 
     <%
         }
     %>
+    </div>
 
-<%--    <div>--%>
+    <div>
+        <c:forEach  items="${book-list}" var="book" >
+        <span>
+            <img class="img1" src="${book.cover}" alt="无法识别图片">
+            ${book.name}
+        </span>
+        </c:forEach>
+    </div>
 
-<%--        <c:forEach  items="${Book}" var="book" >--%>
-<%--        <span>--%>
-<%--            <img class="img1" src="${book.cover}" alt="无法识别图片">--%>
-<%--            ${book.name}--%>
-<%--        </span>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<div1 class="box">
-    <a href="#">&lt;&lt;上一页</a>
-    <a href="#">1</a>
-    <a href="#">&gt;&gt;下一页</a>
-</div1>
-
+    <%--页数选择--%>
+    <jsp:include page="page.jsp">
+        <jsp:param name="url" value="${pageContext.request.contextPath }/goods_list"></jsp:param>
+        <jsp:param name="param" value="&typeid=${id}"></jsp:param>
+    </jsp:include>
 </section>
 
 
@@ -141,13 +150,25 @@
 
 
 <section id="personal" style="display: none">
-    <h1>欢迎，${sessionScope.get("username")}!</h1>
+
+
     <div>
      <div class="1" style="background-color: #d5cccc">
          <h1 class="2">个人信息</h1>
+<%--         <%--%>
+<%--             UserService userService = new UserServiceImpl();--%>
+<%--             List<User> users = userService.findAll();--%>
+<%--             for (User user : users) {--%>
+
+<%--         %>--%>
+
+<%--         <%=user.getUsername()%>--%>
+<%--         <%--%>
+<%--             }--%>
+<%--         %>--%>
+         <img   src="<%%>">
          <h2>用户名：${sessionScope.get("username")}</h2>
          <h2>密码：${sessionScope.get("password")}</h2>
-
 
      </div>
         ----------------------------------------------------------------
