@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : yyy
+ Source Server         : CY
  Source Server Type    : MySQL
- Source Server Version : 80400
+ Source Server Version : 80300
  Source Host           : localhost:3306
  Source Schema         : bookmanagement
 
  Target Server Type    : MySQL
- Target Server Version : 80400
+ Target Server Version : 80300
  File Encoding         : 65001
 
- Date: 29/05/2024 21:27:38
+ Date: 30/05/2024 16:52:43
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,24 @@ CREATE TABLE `book`  (
 -- Records of book
 -- ----------------------------
 INSERT INTO `book` VALUES (1, '三国演义', 1, NULL, 6);
-INSERT INTO `book` VALUES (2, '走近科学', 2, NULL, 8);
+INSERT INTO `book` VALUES (2, '走近科学', 2, 'https://profile-avatar.csdnimg.cn/a90ef3bb2e7d47deb9dabfe94000acc5_qq_74143974.jpg!1', 8);
+
+-- ----------------------------
+-- Table structure for record
+-- ----------------------------
+DROP TABLE IF EXISTS `record`;
+CREATE TABLE `record`  (
+  `r_id` int(0) NOT NULL,
+  `b_id` int(0) NULL DEFAULT NULL,
+  `u_id` int(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`r_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of record
+-- ----------------------------
+INSERT INTO `record` VALUES (1, 1, 1);
+INSERT INTO `record` VALUES (2, 1, 2);
 
 -- ----------------------------
 -- Table structure for type
@@ -57,19 +74,18 @@ INSERT INTO `type` VALUES (2, '科学');
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `u_id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `u_id` int(0) NOT NULL COMMENT '自增主键',
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '密码',
-  `isAdmin` tinyint(0) NULL DEFAULT 0 COMMENT '1为管理员，0为普通用户',
+  `isAdmin` tinyint(0) NULL DEFAULT NULL COMMENT '1为管理员，0为普通用户',
   `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '头像',
   PRIMARY KEY (`u_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (0000000001, 'admin', '123456', 1, 'p1.jpg');
-INSERT INTO `user` VALUES (0000000002, '1', '1', 1, 'p1.jpg');
-INSERT INTO `user` VALUES (0000000017, 'shabi', 'shabi', 0, NULL);
+INSERT INTO `user` VALUES (1, '1', '1', 1, 'https://profile-https://files.codelife.cc/icons/douyu.svg');
+INSERT INTO `user` VALUES (2, 'admin', 'admin', 1, 'https://profile-https://files.codelife.cc/icons/douyu.svg');
 
 SET FOREIGN_KEY_CHECKS = 1;
