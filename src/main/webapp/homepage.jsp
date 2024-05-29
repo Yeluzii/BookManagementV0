@@ -117,6 +117,8 @@
     <button class="place" href="/shop" onclick="showShop()">商城</button>
     <br>
     <button class="place" href="/order" onclick="showOrder()">我的订单</button>
+    <br>
+    <button class="place" href="/order" onclick="showUser()">后台管理</button>
 </nav2>
 
 <section id="shop">
@@ -130,13 +132,13 @@
 <%--//        }--%>
 <%--    %>--%>
 
-    <c:forEach items="${list}" var="list">
-        <div>
-            <h3 style="color: #14adef;text-shadow: 5px 5px 5px #707edf">
-                <c:out value="${list.name}"></c:out>
-            </h3>
-        </div>
-    </c:forEach>
+<%--    <c:forEach items="${list}" var="list">--%>
+<%--        <div>--%>
+<%--            <h3 style="color: #14adef;text-shadow: 5px 5px 5px #707edf">--%>
+<%--                <c:out value="${list.name}"></c:out>--%>
+<%--            </h3>--%>
+<%--        </div>--%>
+<%--    </c:forEach>--%>
 
 </section>
 
@@ -148,24 +150,41 @@
     <h2 style="color: #14eaea;text-shadow: 5px 5px 5px #7283f6">个人中心</h2>
 </section>
 
+<section id="user" style="display: none">
+    <h2 style="color: #14eaea;text-shadow: 5px 5px 5px #7283f6">所有用户</h2>
+    <form action="<%request.getContextPath();%>/user/findAll" method="post">
+        <button type="submit">查询</button>
+    </form>
+</section>
+
 
 <script>
     function showCenter() {
         document.getElementById("order").style.display = "none";
         document.getElementById("shop").style.display = "none";
         document.getElementById("center").style.display = "block";
+        document.getElementById("user").style.display = "none";
     }
 
     function showOrder() {
         document.getElementById("order").style.display = "block";
         document.getElementById("shop").style.display = "none";
         document.getElementById("center").style.display = "none";
+        document.getElementById("user").style.display = "none";
     }
 
     function showShop() {
         document.getElementById("order").style.display = "none";
         document.getElementById("shop").style.display = "block";
         document.getElementById("center").style.display = "none";
+        document.getElementById("user").style.display = "none";
+    }
+
+    function showUser() {
+        document.getElementById("order").style.display = "none";
+        document.getElementById("shop").style.display = "none";
+        document.getElementById("center").style.display = "none";
+        document.getElementById("user").style.display = "block";
     }
 
 </script>

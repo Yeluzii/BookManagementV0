@@ -43,6 +43,9 @@ public class UserServlet extends HttpServlet{
             case "login" -> {
                 login(req, resp);
             }
+            case "findAll" -> {
+                findAll(req, resp);
+            }
             case "logout" -> {
                 logout(req, resp);
             }
@@ -50,13 +53,18 @@ public class UserServlet extends HttpServlet{
 
     }
 
-    public void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html;charset=utf-8");
+        resp.getWriter().write(userService.findAll().toString());
+    }
+
+    private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String username= req.getParameter("regUsername");
         String password= req.getParameter("regPassword");
         System.out.println(username + password);
-        User user = null;
+        User user = new User(username,password);
         try {
-            user = userService.register(username, password);
+            userService.register(user);
             log.info(String.valueOf(user));
             user.setPassword(null);
         }catch (Exception e) {
