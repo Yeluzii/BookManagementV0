@@ -83,6 +83,7 @@
 <%--</nav>--%>
 
 <section id="login" >
+    <%=session.getAttribute("login")%>
     <%=session.getAttribute("register")%>
 
     <form id="loginForm" action="<%request.getContextPath();%>/user/login">
@@ -114,7 +115,7 @@
             <a href="#" onclick="showRegister()">未拥有账号，去注册</a>
         </nav>
 
-            <button type="submit">Login</button>
+            <button type="submit" >Login</button>
     </form>
 </section>
     <section id="register" style="display:none;">
@@ -168,13 +169,21 @@
 
 
     // function register() {
-    //     // Implement registration logic here
-    //     alert("Registration logic will go here!");
+    //     if (sessionStorage.getItem("register") === "FAILED"){
+    //         alert("REGISTER FAILED!!!");
+    //     }else if (sessionStorage.getItem("register") === "SUCCESS"){
+    //         alert("REGISTER SUCCESSFULLY!")
+    //     }
+    //     sessionStorage.clear();
     // }
     //
+    //
     // function login() {
-    //     // Implement login logic here
-    //     alert("Login logic will go here!");
+    //     if (sessionStorage.getItem("login") === "FAILED"){
+    //         sessionStorage.setItem("login", "FAILED")
+    //         alert("LOGIN FAILED!!!");
+    //     }
+    //     sessionStorage.clear();
     // }
 </script>
 
