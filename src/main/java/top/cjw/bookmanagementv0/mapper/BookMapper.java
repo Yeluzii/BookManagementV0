@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BookMapper {
     List<Book> selectAll();
+    List<Book> selectByName(String name);
 }

@@ -92,6 +92,13 @@
         <%= session.getAttribute("username")%>登录成功
     </h2>
 
+    <div>
+        <form action="<%request.getContextPath();%>/book/search">
+            <input type="text" placeholder="请输入书名" name="name">
+            <button type="submit">搜索</button>
+        </form>
+    </div>
+
     <%
         BookService bookService = new BookServiceImpl();
         List<Book> books = bookService.findAll();

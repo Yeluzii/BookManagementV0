@@ -6,4 +6,9 @@
         SELECT *
         FROM book
     </select>
+    <select id="selectByName" resultType="top.cjw.bookmanagementv0.entity.Book">
+        SELECT *
+        FROM book
+        WHERE name like concat('%',#{name},'%');
+    </select>
 </mapper>

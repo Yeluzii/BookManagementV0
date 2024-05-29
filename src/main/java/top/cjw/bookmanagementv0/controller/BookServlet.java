@@ -39,11 +39,24 @@ public class BookServlet extends HttpServlet {
         String method = StringUtil.subUri(uri);
 //        login(req, resp);
         switch (method) {
-            case "register" -> {
+            case "selectAll" -> {
                 showBook(req, resp);
+            }
+            case "search" -> {
+                searchBook(req, resp);
             }
         }
 
+    }
+
+    private void searchBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        if (StringUtils.isEmpty(name)) {
+            showBook(req, resp);
+        } else {
+            resp.setContentType("text/html;charset=utf-8");
+            resp.getWriter().write(bookService.findByName(name).toString());
+        }
     }
 
     private void showBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
