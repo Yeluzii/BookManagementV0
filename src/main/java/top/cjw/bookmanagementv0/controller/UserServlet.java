@@ -12,9 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.UserService;
 import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
+import top.cjw.bookmanagementv0.utils.ResponseUtils;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/user/*")
 @Slf4j
@@ -43,6 +45,9 @@ public class UserServlet extends HttpServlet{
             case "login" -> {
                 login(req, resp);
             }
+            case "findAll" -> {
+                findAll(req, resp);
+            }
             case "logout" -> {
                 logout(req, resp);
             }
@@ -50,13 +55,21 @@ public class UserServlet extends HttpServlet{
 
     }
 
-    public void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        ResponseUtils responseUtils;
+        List<User> users = userService.findAll();
+        responseUtils = new ResponseUtils().put("list",users);
+        resp.setContentType("text/html;charset=utf-8");
+        resp.getWriter().println(responseUtils.toJsonString());
+    }
+
+    private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String username= req.getParameter("regUsername");
         String password= req.getParameter("regPassword");
         System.out.println(username + password);
-        User user = null;
+        User user = new User(username,password);
         try {
-            user = userService.register(username, password);
+            userService.register(user);
             log.info(String.valueOf(user));
             user.setPassword(null);
         }catch (Exception e) {
@@ -90,7 +103,8 @@ public class UserServlet extends HttpServlet{
         session.setAttribute("username", username);
         assert  user != null;
         session.setAttribute("avatar", user.getAvatar());
-        resp.sendRedirect("/homepage.jsp");
+        session.setAttribute("password", password);
+        resp.sendRedirect("/homepagev1.jsp");
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

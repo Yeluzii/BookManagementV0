@@ -10,9 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User {
-    private Integer id;
+    private Integer u_id;
     private String username;
     private String password;
     private Byte isAdmin;
     private String avatar;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
