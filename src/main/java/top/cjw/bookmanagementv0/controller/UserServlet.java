@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import top.cjw.bookmanagementv0.entity.Book;
+import top.cjw.bookmanagementv0.service.BookService;
+import top.cjw.bookmanagementv0.service.impl.BookServiceImpl;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.UserService;
 import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
@@ -24,10 +27,12 @@ import java.util.Objects;
 @Slf4j
 public class UserServlet extends HttpServlet{
     private UserService userService;
+    private BookService bookService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         userService = new UserServiceImpl();
+        bookService = new BookServiceImpl();
     }
 
     @Override
@@ -37,6 +42,7 @@ public class UserServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         String uri = req.getRequestURI();
         String method = StringUtil.subUri(uri);
 //        login(req, resp);
@@ -53,8 +59,35 @@ public class UserServlet extends HttpServlet{
             case "logout" -> {
                 logout(req, resp);
             }
+            case "home" -> {
+                home(req, resp);
+            }
+            case "personal-center" -> {
+                personalCenter(req, resp);
+            }
         }
 
+    }
+
+    private void personalCenter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = (String) req.getSession().getAttribute("username");
+        User user = userService.userInfo(username);
+        HttpSession session = req.getSession();
+        session.setAttribute("user",user);
+        System.out.println(user);
+        if (user == null) {
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/PersonalCenter.jsp").forward(req, resp);
+//            resp.sendRedirect("/PersonalCenter.jsp");
+        }
+    }
+
+    private void home(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession();
+        List<Book> list = bookService.findAll();
+        req.setAttribute("book-list", list);
+        req.getRequestDispatcher("/homepage.jsp").forward(req,resp);
     }
 
     private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -71,10 +104,10 @@ public class UserServlet extends HttpServlet{
         System.out.println(username + password);
         User user = new User(username,password);
 
-        String re = req.getParameter("verifyCode");
-        String answer = (String) req.getSession().getAttribute("verifyCode");
-        System.out.println(re);
-        System.out.println(answer);
+//        String re = req.getParameter("verifyCode");
+//        String answer = (String) req.getSession().getAttribute("verifyCode");
+//        System.out.println(re);
+//        System.out.println(answer);
 //        if (!Objects.equals(re, answer)){
 //            resp.getWriter().println("Verify-code Error!!!");
 //        }else {
@@ -99,6 +132,7 @@ public class UserServlet extends HttpServlet{
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         // 接收用户输入，前端用表单键值对的形式传参
         String username = req.getParameter("loginUsername");
         String password = req.getParameter("loginPassword");
@@ -106,10 +140,11 @@ public class UserServlet extends HttpServlet{
         User user = new User(username,password);
 
 
-        String re = req.getParameter("verifyCode");
-        String answer = (String) req.getSession().getAttribute("verifyCode");
-        System.out.println(re);
-        System.out.println(answer);
+//        String re = req.getParameter("verifyCode");
+//        String answer = (String) req.getSession().getAttribute("verifyCode");
+//        System.out.println(re);
+//        System.out.println(answer);
+
 //        if(!re.equals(answer)){
 //            resp.getWriter().println("Verify-code Error!!!");
 //        }else{
@@ -119,7 +154,7 @@ public class UserServlet extends HttpServlet{
                 Boolean flag = userService.login(username, password);
                 if (flag){
                     req.getSession().setAttribute("login","FAILED");
-//                    request.setAttribute("failMsg", "用户名、邮箱或者密码错误，请重新登录！");
+//                    request.setAttribute("failMsg", "用户名或者密码错误，请重新登录！");
                     req.getRequestDispatcher("/login.jsp").forward(req, resp);
 //                    resp.sendRedirect("/login.jsp");
                 }
@@ -137,12 +172,12 @@ public class UserServlet extends HttpServlet{
         // 将用户信息存储到 Session 中
         HttpSession session = req.getSession();
         session.setAttribute("username", username);
+        user = userService.userInfo(username);
+        session.setAttribute("user", user);
         session.setAttribute("avatar", user.getAvatar());
         session.setAttribute("password", password);
-        req.setAttribute("avatar",user.getAvatar());
-        req.setAttribute("user",user);
-//        req.getRequestDispatcher("/header.jsp").forward(req,resp);
-        resp.sendRedirect("/header.jsp");
+//        req.getRequestDispatcher("/homepage.jsp").forward(req, resp);
+        resp.sendRedirect("/homepage.jsp");
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

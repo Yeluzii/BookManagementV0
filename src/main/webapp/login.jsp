@@ -92,24 +92,24 @@
 
         <label for="loginPassword">Password:</label><input type="password" id="loginPassword" name="loginPassword" required>
 
-        <label>
-            <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">
-        </label>
-        <img src="/verifyCode" alt="验证码" id="code">
-        <a href="" id="change">看不清，换一张</a>
-        <script>
-            window.onload = function () {
-                //  获取图片对象
-                let img = document.getElementById("code");
-                //  获取超链接对象
-                let href = document.getElementById("change");
-                href.onclick = function () {
-                    //  加时间戳
-                    const date = new Date().getTime();
-                    img.src = "verify-code?" + date;
-                }
-            }
-        </script>
+<%--        <label>--%>
+<%--            <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
+<%--        </label>--%>
+<%--        <img src="/verifyCode" alt="验证码" id="code">--%>
+<%--        <a href="" id="change">看不清，换一张</a>--%>
+<%--        <script>--%>
+<%--            window.onload = function () {--%>
+<%--                //  获取图片对象--%>
+<%--                let img = document.getElementById("code");--%>
+<%--                //  获取超链接对象--%>
+<%--                let href = document.getElementById("change");--%>
+<%--                href.onclick = function () {--%>
+<%--                    //  加时间戳--%>
+<%--                    const date = new Date().getTime();--%>
+<%--                    img.src = "verify-code?" + date;--%>
+<%--                }--%>
+<%--            }--%>
+<%--        </script>--%>
 
         <nav>
             <a href="#" onclick="showRegister()">未拥有账号，去注册</a>
@@ -118,6 +118,7 @@
             <button type="submit" >Login</button>
     </form>
 </section>
+
     <section id="register" style="display:none;">
 
         <form id="registerForm" action="<%request.getContextPath();%>/user/register">
@@ -128,24 +129,24 @@
             <label for="regPassword">Password:</label>
             <input type="password" id="regPassword" name="regPassword" required>
 
-            <label>
-                <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">
-            </label>
-            <img src="/verifyCode" alt="验证码" id="code">
-            <a href="" id="change">看不清，换一张</a>
-            <script>
-                window.onload = function () {
-                    //  获取图片对象
-                    let img = document.getElementById("code");
-                    //  获取超链接对象
-                    let href = document.getElementById("change");
-                    href.onclick = function () {
-                        //  加时间戳
-                        const date = new Date().getTime();
-                        img.src = "verify-code?" + date;
-                    }
-                }
-            </script>
+<%--            <label>--%>
+<%--                <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
+<%--            </label>--%>
+<%--            <img src="/verifyCode" alt="验证码" id="code">--%>
+<%--            <a href="" id="change">看不清，换一张</a>--%>
+<%--            <script>--%>
+<%--                window.onload = function () {--%>
+<%--                    //  获取图片对象--%>
+<%--                    let img = document.getElementById("code");--%>
+<%--                    //  获取超链接对象--%>
+<%--                    let href = document.getElementById("change");--%>
+<%--                    href.onclick = function () {--%>
+<%--                        //  加时间戳--%>
+<%--                        const date = new Date().getTime();--%>
+<%--                        img.src = "verify-code?" + date;--%>
+<%--                    }--%>
+<%--                }--%>
+<%--            </script>--%>
 
             <nav>
                 <a href="#" onclick="showLogin()">注册完成，去登录</a>

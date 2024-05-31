@@ -82,12 +82,9 @@
 
 <nav>
     <form action="<%request.getContextPath();%>/user/logout">
-        <%
-            User user = (User) request.getAttribute("user");
-        %>
-        <img class="img3" src="<%=user.getAvatar()%>" alt="头像">
-    <a href="#" onclick="showHome()">主页</a> |
-    <a href="#" onclick="showPersonal()">个人中心</a>|
+        <img class="img3" src="<%=session.getAttribute("avatar")%>" alt="头像">
+    <a href="<%request.getContextPath();%>/user/home" >主页</a> |
+    <a href="<%request.getContextPath();%>/user/personal-center" >个人中心</a>|
     <a href="#" onclick="showManage()">后台管理</a>
     <button type="submit">退出登录</button>
     </form>
@@ -97,7 +94,9 @@
     <div>
         全部 | 政治 | 经济 | 文化 | 社会 | 科学
         <form class="search" action="<%request.getContextPath();%>/book/search">
-            <input type="text" placeholder="请输入书名" name="name">
+            <label>
+                <input type="text" placeholder="请输入书名" name="name">
+            </label>
             <button type="submit">搜索</button>
         </form>
     </div>

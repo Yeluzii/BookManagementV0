@@ -8,4 +8,5 @@ public interface UserService {
     List<User> findAll();
     Boolean login(String username, String password);
     Boolean register(User user);
+    User userInfo(String username);
 }

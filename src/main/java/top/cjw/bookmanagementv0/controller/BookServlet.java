@@ -50,11 +50,11 @@ public class BookServlet extends HttpServlet {
     }
 
     private void searchBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         String name = req.getParameter("name");
         if (StringUtils.isEmpty(name)) {
             showBook(req, resp);
         } else {
-            resp.setContentType("text/html;charset=utf-8");
 //            resp.getWriter().write(bookService.findByName(name).toString());
             List<Book> list = bookService.findByName(name);
             System.out.println(list);

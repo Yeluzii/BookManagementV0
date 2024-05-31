@@ -47,4 +47,10 @@ public class UserServiceImpl implements UserService {
         return flag;
     }
 
+    @Override
+    public User userInfo(String username) {
+        return (User) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<User>selectOne("top.cjw.bookmanagementv0.mapper.UserMapper.selectByUserName", username));
+    }
+
+
 }
