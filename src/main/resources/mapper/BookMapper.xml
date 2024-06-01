@@ -11,4 +11,9 @@
         FROM book
         WHERE name like concat('%',#{name},'%');
     </select>
+    <select id="selectByTypeId" resultType="top.cjw.bookmanagementv0.entity.Book">
+        SELECT *
+        FROM book
+        WHERE t_id = #{typeId};
+    </select>
 </mapper>

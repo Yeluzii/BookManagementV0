@@ -20,30 +20,31 @@
 
 <div>
 
-    <%
-        List<Book> list = (List<Book>) request.getAttribute("book-list");
-        for (Book book : list) {
-    %>
+<%--    <%--%>
+<%--        List<Book> list = (List<Book>) request.getAttribute("bookList");--%>
+<%--        for (Book book : list) {--%>
+<%--    %>--%>
 
-    <span>
-        <img class="img1" src=" <%=book.getCover() %>" alt="无法识别图片">
-        <br>
-        <%=book.getName()%>|库存：<%=book.getCount()%>本
-    </span>
+<%--    <span>--%>
+<%--        <img class="img1" src=" <%=book.getCover() %>" alt="无法识别图片">--%>
+<%--        <br>--%>
+<%--        <%=book.getName()%>|库存：<%=book.getCount()%>本--%>
+<%--    </span>--%>
 
-    <%
-        }
-    %>
-</div>
-
-<%--<div>--%>
-<%--    <c:forEach  items="${list}" var="book" >--%>
-<%--        <span>--%>
-<%--            <img class="img1" src="${book.cover}" alt="无法识别图片">--%>
-<%--            ${book.name}--%>
-<%--        </span>--%>
-<%--    </c:forEach>--%>
+<%--    <%--%>
+<%--        }--%>
+<%--    %>--%>
 <%--</div>--%>
+
+    <div>
+        <c:forEach items="${bookList}" var="book">
+        <span>
+            <img class="img1" src="${book.cover}" alt="无法识别图片">
+            <br>
+            ${book.name}|库存：${book.count}本
+        </span>
+        </c:forEach>
+    </div>
 
 </body>
 </html>

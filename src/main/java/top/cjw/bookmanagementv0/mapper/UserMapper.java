@@ -8,4 +8,5 @@ public interface UserMapper {
     List<User> selectAll();
     User selectByUserName(String userName);
     void add(User user);
+    void update(User user);
 }

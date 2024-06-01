@@ -92,15 +92,27 @@
 </nav>
 
     <div>
-        全部 | 政治 | 经济 | 文化 | 社会 | 科学
-        <form class="search" action="<%request.getContextPath();%>/book/search">
+        <label>
+            <a href="<%request.getContextPath();%>/book/selectAll">全部</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=1">古典文学</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=2">科学</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=3">现代文学</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=4">历史</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=5">教育</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=6">科技</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=7">漫画</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=8">小说</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=9">外国文学</a>
+            <a href="<%request.getContextPath();%>/book/type?typeId=10">其他</a>
+        </label>
+
+        <form class="search" action="<%request.getContextPath();%>/book/search" method="post">
             <label>
                 <input type="text" placeholder="请输入书名" name="name">
             </label>
             <button type="submit">搜索</button>
         </form>
     </div>
-
 
 
 </body>

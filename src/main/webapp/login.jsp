@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <script src="./js/jquery.min.js"></script>
@@ -71,48 +72,45 @@
     </style>
 </head>
 <body>
+
 <div>
 <header>
     <h1>图书管理系统</h1>
 </header>
 
-<%--<nav>--%>
-<%--    <a href="#" onclick="showRegister()">注册</a> |--%>
-<%--    <a href="#" onclick="showLogin()">登录</a> |--%>
-<%--    <a href="#" onclick="showHome()">主页</a>--%>
-<%--</nav>--%>
 
 <section id="login" >
-    <%=session.getAttribute("login")%>
-    <%=session.getAttribute("register")%>
+<%--    <%=session.getAttribute("login")%>--%>
+<%--    <%=session.getAttribute("register")%>--%>
 
-    <form id="loginForm" action="<%request.getContextPath();%>/user/login">
+<c:if test="${not empty msg}">
+    <div id="message">${msg}</div>
+    <script>
+        // 简单示例，显示消息后延迟隐藏
+        window.onload = function() {
+            var messageElement = document.getElementById('message');
+            if (messageElement.innerText) {
+                setTimeout(function() {
+                    messageElement.style.display = 'none';
+                }, 5000); // 5秒后自动隐藏
+            }
+        };
+    </script>
+</c:if>
+
+    <form id="loginForm" action="<%request.getContextPath();%>/user/login" method="post">
         <h2>Login</h2>
         <label for="loginUsername">Username:</label><input type="text" id="loginUsername" name="loginUsername" required>
 
         <label for="loginPassword">Password:</label><input type="password" id="loginPassword" name="loginPassword" required>
 
-<%--        <label>--%>
-<%--            <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
-<%--        </label>--%>
-<%--        <img src="/verifyCode" alt="验证码" id="code">--%>
-<%--        <a href="" id="change">看不清，换一张</a>--%>
-<%--        <script>--%>
-<%--            window.onload = function () {--%>
-<%--                //  获取图片对象--%>
-<%--                let img = document.getElementById("code");--%>
-<%--                //  获取超链接对象--%>
-<%--                let href = document.getElementById("change");--%>
-<%--                href.onclick = function () {--%>
-<%--                    //  加时间戳--%>
-<%--                    const date = new Date().getTime();--%>
-<%--                    img.src = "verify-code?" + date;--%>
-<%--                }--%>
-<%--            }--%>
-<%--        </script>--%>
-
         <nav>
             <a href="#" onclick="showRegister()">未拥有账号，去注册</a>
+<%--            <label>--%>
+<%--                <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
+<%--            </label>--%>
+<%--            <img src="/verifyCode" alt="验证码" id="code">--%>
+<%--            <a href="" id="change">看不清，换一张</a>--%>
         </nav>
 
             <button type="submit" >Login</button>
@@ -121,7 +119,7 @@
 
     <section id="register" style="display:none;">
 
-        <form id="registerForm" action="<%request.getContextPath();%>/user/register">
+        <form id="registerForm" action="<%request.getContextPath();%>/user/register" method="post">
             <h2>注册</h2>
             <label for="regUsername">Username:</label>
             <input type="text" id="regUsername" name="regUsername" required>
@@ -129,32 +127,33 @@
             <label for="regPassword">Password:</label>
             <input type="password" id="regPassword" name="regPassword" required>
 
-<%--            <label>--%>
-<%--                <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
-<%--            </label>--%>
-<%--            <img src="/verifyCode" alt="验证码" id="code">--%>
-<%--            <a href="" id="change">看不清，换一张</a>--%>
-<%--            <script>--%>
-<%--                window.onload = function () {--%>
-<%--                    //  获取图片对象--%>
-<%--                    let img = document.getElementById("code");--%>
-<%--                    //  获取超链接对象--%>
-<%--                    let href = document.getElementById("change");--%>
-<%--                    href.onclick = function () {--%>
-<%--                        //  加时间戳--%>
-<%--                        const date = new Date().getTime();--%>
-<%--                        img.src = "verify-code?" + date;--%>
-<%--                    }--%>
-<%--                }--%>
-<%--            </script>--%>
-
             <nav>
                 <a href="#" onclick="showLogin()">注册完成，去登录</a>
+<%--                <label>--%>
+<%--                    <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
+<%--                </label>--%>
+<%--                <img src="/verifyCode" alt="验证码" id="code">--%>
+<%--                <a href="" id="change">看不清，换一张</a>--%>
             </nav>
 
             <button type="submit" >注册</button>
         </form>
     </section>
+
+    <script>
+        window.onload = function () {
+            //  获取图片对象
+            let img = document.getElementById("code");
+            //  获取超链接对象
+            let href = document.getElementById("change");
+            href.onclick = function () {
+                //  加时间戳
+                const date = new Date().getTime();
+                img.src = "verify-code?" + date;
+            }
+        }
+    </script>
+
 </div>
 
 <script>
@@ -168,24 +167,6 @@
         document.getElementById("login").style.display = "block";
     }
 
-
-    // function register() {
-    //     if (sessionStorage.getItem("register") === "FAILED"){
-    //         alert("REGISTER FAILED!!!");
-    //     }else if (sessionStorage.getItem("register") === "SUCCESS"){
-    //         alert("REGISTER SUCCESSFULLY!")
-    //     }
-    //     sessionStorage.clear();
-    // }
-    //
-    //
-    // function login() {
-    //     if (sessionStorage.getItem("login") === "FAILED"){
-    //         sessionStorage.setItem("login", "FAILED")
-    //         alert("LOGIN FAILED!!!");
-    //     }
-    //     sessionStorage.clear();
-    // }
 </script>
 
 </body>

@@ -46,7 +46,19 @@ public class BookServlet extends HttpServlet {
             case "search" -> {
                 searchBook(req, resp);
             }
+            case "type" -> {
+                searchByTypeId(req, resp);
+            }
         }
+    }
+
+    private void searchByTypeId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
+        String typeId = req.getParameter("typeId");
+        List<Book> list = bookService.findByTypeId(Integer.parseInt(typeId));
+        System.out.println(list);
+        req.setAttribute("bookList", list);
+        req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
     }
 
     private void searchBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,7 +70,7 @@ public class BookServlet extends HttpServlet {
 //            resp.getWriter().write(bookService.findByName(name).toString());
             List<Book> list = bookService.findByName(name);
             System.out.println(list);
-            req.setAttribute("book-list", list);
+            req.setAttribute("bookList", list);
             req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
         }
     }
@@ -68,7 +80,7 @@ public class BookServlet extends HttpServlet {
 //        resp.getWriter().write(bookService.findAll().toString());
         List<Book> list = bookService.findAll();
         System.out.println(list);
-        req.setAttribute("book-list", list);
+        req.setAttribute("bookList", list);
         req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
     }
 

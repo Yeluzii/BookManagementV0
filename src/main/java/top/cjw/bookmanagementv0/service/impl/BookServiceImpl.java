@@ -19,4 +19,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findByName(String name) {
         return (List<Book>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<Book>selectList("top.cjw.bookmanagementv0.mapper.BookMapper.selectByName", name));
     }
+
+    @Override
+    public List<Book> findByTypeId(int typeId) {
+        return (List<Book>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<Book>selectList("top.cjw.bookmanagementv0.mapper.BookMapper.selectByTypeId", typeId));
+    }
 }

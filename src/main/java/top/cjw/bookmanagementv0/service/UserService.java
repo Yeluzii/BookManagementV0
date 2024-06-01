@@ -9,4 +9,5 @@ public interface UserService {
     Boolean login(String username, String password);
     Boolean register(User user);
     User userInfo(String username);
+    Boolean updateUser(User user);
 }

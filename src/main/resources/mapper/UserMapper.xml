@@ -4,10 +4,14 @@
     <insert id="add" parameterType="top.cjw.bookmanagementv0.entity.User">
         insert into user(username,password) value (#{username}, #{password})
     </insert>
+    <update id="update">
+        update user set password = #{password}
+        WHERE username = #{username}
+    </update>
     <select id="selectByUserName" parameterType="String" resultType="top.cjw.bookmanagementv0.entity.User">
         SELECT *
         FROM user
-        WHERE username = #{value}
+        WHERE username = #{username}
     </select>
     <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.User">
         SELECT *

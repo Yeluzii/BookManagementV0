@@ -65,8 +65,27 @@ public class UserServlet extends HttpServlet{
             case "personal-center" -> {
                 personalCenter(req, resp);
             }
+            case "update-password" -> {
+                updatePassword(req, resp);
+            }
         }
 
+    }
+
+    private void updatePassword(HttpServletRequest   req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        String old_password = req.getParameter("old_password");
+        String new_password = req.getParameter("new_password");
+        User user = (User) session.getAttribute("user");
+        System.out.println(user);
+        if (user.getPassword().equals(old_password)) {
+            userService.updateUser(new User(user.getUsername(), new_password));
+            req.setAttribute("msg","修改成功，请重新登录!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        } else {
+            req.setAttribute("msg","修改失败，原密码不正确，您再好好望望!");
+            req.getRequestDispatcher("/PersonalCenter.jsp").forward(req, resp);
+        }
     }
 
     private void personalCenter(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -86,8 +105,8 @@ public class UserServlet extends HttpServlet{
     private void home(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession();
         List<Book> list = bookService.findAll();
-        req.setAttribute("book-list", list);
-        req.getRequestDispatcher("/homepage.jsp").forward(req,resp);
+        req.setAttribute("bookList", list);
+        req.getRequestDispatcher("/book/selectAll").forward(req,resp);
     }
 
     private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -176,8 +195,10 @@ public class UserServlet extends HttpServlet{
         session.setAttribute("user", user);
         session.setAttribute("avatar", user.getAvatar());
         session.setAttribute("password", password);
-//        req.getRequestDispatcher("/homepage.jsp").forward(req, resp);
-        resp.sendRedirect("/homepage.jsp");
+        List<Book> list = bookService.findAll();
+        System.out.println(list);
+        req.setAttribute("bookList", list);
+        req.getRequestDispatcher("/book/selectAll").forward(req, resp);
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

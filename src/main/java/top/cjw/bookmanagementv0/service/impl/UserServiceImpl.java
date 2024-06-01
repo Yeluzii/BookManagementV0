@@ -52,5 +52,11 @@ public class UserServiceImpl implements UserService {
         return (User) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<User>selectOne("top.cjw.bookmanagementv0.mapper.UserMapper.selectByUserName", username));
     }
 
+    @Override
+    public Boolean updateUser(User user) {
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.UserMapper.update", user));
+        return true;
+    }
+
 
 }
