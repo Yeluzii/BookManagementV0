@@ -1,8 +1,6 @@
 package top.cjw.bookmanagementv0.controller;
 
-import com.alibaba.druid.util.StringUtils;
 import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,29 +8,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import top.cjw.bookmanagementv0.entity.Book;
-import top.cjw.bookmanagementv0.service.BookService;
-import top.cjw.bookmanagementv0.service.impl.BookServiceImpl;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.UserService;
 import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
-import top.cjw.bookmanagementv0.utils.ResponseUtils;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/user/*")
 @Slf4j
 public class UserServlet extends HttpServlet{
     private UserService userService;
-    private BookService bookService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         userService = new UserServiceImpl();
-        bookService = new BookServiceImpl();
     }
 
     @Override
@@ -68,8 +59,25 @@ public class UserServlet extends HttpServlet{
             case "update-password" -> {
                 updatePassword(req, resp);
             }
+            case "record" -> {
+                record(req, resp);
+            }
+            case "bgManagement" -> {
+                bgManagement(req, resp);
+            }
         }
 
+    }
+
+    private void bgManagement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/admin_bgManagement.jsp").forward(req, resp);
+    }
+
+    private void record(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        System.out.println(user);
+        req.getRequestDispatcher("/record/findByUsername").forward(req, resp);
     }
 
     private void updatePassword(HttpServletRequest   req, HttpServletResponse resp) throws IOException, ServletException {
@@ -98,23 +106,18 @@ public class UserServlet extends HttpServlet{
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("/PersonalCenter.jsp").forward(req, resp);
-//            resp.sendRedirect("/PersonalCenter.jsp");
         }
     }
 
     private void home(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession();
-        List<Book> list = bookService.findAll();
-        req.setAttribute("bookList", list);
         req.getRequestDispatcher("/book/selectAll").forward(req,resp);
     }
 
-    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        ResponseUtils responseUtils;
+    private void findAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         List<User> users = userService.findAll();
-        responseUtils = new ResponseUtils().put("list",users);
-        resp.setContentType("text/html;charset=utf-8");
-        resp.getWriter().println(responseUtils.toJsonString());
+        System.out.println(users);
+        req.setAttribute("userList",users);
+        req.getRequestDispatcher("/admin_UserList.jsp").forward(req,resp);
     }
 
     private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -151,7 +154,6 @@ public class UserServlet extends HttpServlet{
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
         // 接收用户输入，前端用表单键值对的形式传参
         String username = req.getParameter("loginUsername");
         String password = req.getParameter("loginPassword");
@@ -195,9 +197,6 @@ public class UserServlet extends HttpServlet{
         session.setAttribute("user", user);
         session.setAttribute("avatar", user.getAvatar());
         session.setAttribute("password", password);
-        List<Book> list = bookService.findAll();
-        System.out.println(list);
-        req.setAttribute("bookList", list);
         req.getRequestDispatcher("/book/selectAll").forward(req, resp);
     }
 

@@ -85,7 +85,8 @@
         <img class="img3" src="<%=session.getAttribute("avatar")%>" alt="头像">
     <a href="<%request.getContextPath();%>/user/home" >主页</a> |
     <a href="<%request.getContextPath();%>/user/personal-center" >个人中心</a>|
-    <a href="#" onclick="showManage()">后台管理</a>
+    <a href="<%request.getContextPath();%>/user/record" >借阅记录</a>|
+    <a href="<%request.getContextPath();%>/user/bgManagement" onclick="showManage()">后台管理</a>
     <button type="submit">退出登录</button>
     </form>
 

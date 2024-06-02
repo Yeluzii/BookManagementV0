@@ -28,4 +28,14 @@ class UserServiceTest {
         userService.register(user);
         log.info(String.valueOf(user));
     }
+
+    @Test
+    void userInfo() {
+        log.info(String.valueOf(userService.userInfo("1")));
+    }
+
+    @Test
+    void updateUser() {
+        userService.updateUser(new User("123456","1"));
+    }
 }

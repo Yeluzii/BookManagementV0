@@ -38,6 +38,7 @@ public class BookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         String uri = req.getRequestURI();
         String method = StringUtil.subUri(uri);
         switch (method) {
@@ -53,25 +54,30 @@ public class BookServlet extends HttpServlet {
             case "borrow" -> {
                 borrowBook(req, resp);
             }
+            case "adminAllBook" -> {
+                adminAllBook(req, resp);
+            }
         }
     }
 
+    private void adminAllBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Book> list = bookService.findAll();
+        list.forEach(System.out::println);
+        req.setAttribute("bookList", list);
+        req.getRequestDispatcher("/admin_BookList.jsp").forward(req, resp);
+    }
+
     private void borrowBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        resp.setContentType("text/html;charset=utf-8");
-        HttpSession session = req.getSession();
-        int b_id = Integer.parseInt(req.getParameter("b_id"));
-        System.out.println("b_id为:" + b_id);
-        boolean flag = bookService.borrow(b_id);
-        if (!flag) {
-            session.setAttribute("msg", "借书失败");
+        if (!bookService.borrow(Integer.parseInt(req.getParameter("bookNo")))) {
+            req.setAttribute("msg", "借书失败");
+            req.getRequestDispatcher("/book/selectAll").forward(req, resp);
         } else {
-            session.setAttribute("msg", "借书成功");
+            req.setAttribute("msg", "借书成功");
             req.getRequestDispatcher("/record/borrow").forward(req, resp);
         }
     }
 
     private void searchByTypeId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
         String typeId = req.getParameter("typeId");
         List<Book> list = bookService.findByTypeId(Integer.parseInt(typeId));
         System.out.println(list);
@@ -80,7 +86,6 @@ public class BookServlet extends HttpServlet {
     }
 
     private void searchBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
         String name = req.getParameter("name");
         if (StringUtils.isEmpty(name)) {
             showBook(req, resp);
@@ -94,7 +99,6 @@ public class BookServlet extends HttpServlet {
     }
 
     private void showBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
         List<Book> list = bookService.findAll();
         list.forEach(System.out::println);
         req.setAttribute("bookList", list);

@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
             flag = false;
             return flag;
         } else {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.update", bookId));
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.updateCount", bookId));
         }
         return flag;
     }

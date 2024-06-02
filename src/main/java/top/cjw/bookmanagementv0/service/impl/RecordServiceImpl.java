@@ -11,12 +11,12 @@ import java.util.List;
 public class RecordServiceImpl implements RecordService {
     @Override
     public List<Record> findAll() {
-        return (List<Record>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.selectList("top.cjw.bookmanagementv0.mapper.RecordMapper.findAll"));
+        return (List<Record>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<Record>selectList("top.cjw.bookmanagementv0.mapper.RecordMapper.selectAll"));
     }
 
     @Override
     public List<Record> findByUsername(String username) {
-        return (List<Record>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.selectList("top.cjw.bookmanagementv0.mapper.RecordMapper.findAll", username));
+        return (List<Record>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<Record>selectList("top.cjw.bookmanagementv0.mapper.RecordMapper.selectByUsername", username));
     }
 
     @Override

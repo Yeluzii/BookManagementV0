@@ -10,4 +10,22 @@ class BookServiceTest {
         BookService bookService = new BookServiceImpl();
         System.out.println(bookService.findAll());
     }
+
+    @Test
+    void findByName() {
+        BookService bookService = new BookServiceImpl();
+        System.out.println(bookService.findByName("三"));
+    }
+
+    @Test
+    void findByTypeId() {
+        BookService bookService = new BookServiceImpl();
+        System.out.println(bookService.findByTypeId(1));
+    }
+
+    @Test
+    void borrow() {
+        BookService bookService = new BookServiceImpl();
+        System.out.println(bookService.borrow(1));
+    }
 }

@@ -5,11 +5,8 @@
         insert into record(b_id,u_id,b_datetime,r_datetime) value (#{b_id}, #{u_id}, #{b_datetime}, #{r_datetime})
     </insert>
     <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.Record">
-        SELECT  r_id,username,name,t_name
-        FROM record,user,book,type
-        WHERE record.u_id = user.u_id
-        AND record.b_id = book.b_id
-        AND book.t_id = type.t_id
+        SELECT  *
+        FROM record
     </select>
     <select id="selectByUsername" resultType="top.cjw.bookmanagementv0.entity.Record">
         SELECT  r_id,username,name,t_name
@@ -17,7 +14,7 @@
         WHERE record.u_id = user.u_id
           AND record.b_id = book.b_id
           AND book.t_id = type.t_id
-          AND username = #{value}
+          AND username = #{username}
     </select>
     <select id="selectByBookName" resultType="top.cjw.bookmanagementv0.entity.Record">
         SELECT  r_id,username,name,t_name
