@@ -7,5 +7,6 @@ import java.util.List;
 public interface BookService {
     List<Book> findAll();
     List<Book> findByName(String name);
-    List<Book> findByTypeId(int typeId);
+    List<Book> findByTypeId(Integer typeId);
+    Boolean borrow(Integer bookId);
 }

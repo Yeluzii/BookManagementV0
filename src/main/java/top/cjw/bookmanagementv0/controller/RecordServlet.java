@@ -13,6 +13,8 @@ import top.cjw.bookmanagementv0.service.impl.RecordServiceImpl;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/record/*")
 @Slf4j
@@ -34,19 +36,37 @@ public class RecordServlet extends HttpServlet {
         String uri = req.getRequestURI();
         String method = StringUtil.subUri(uri);
         switch (method) {
-            case "findAll":
-                req.setAttribute("records", recordService.findAll());
-                req.getRequestDispatcher("").forward(req, resp);
-                break;
-            case "findByUsername":
-                req.setAttribute("records", recordService.findByUsername(req.getParameter("username")));
-                req.getRequestDispatcher("").forward(req, resp);
-                break;
-            case "findByBookName":
-                req.setAttribute("records", recordService.findByBookName(req.getParameter("bookName")));
-                req.getRequestDispatcher("").forward(req, resp);
-                break;
+            case "findAll" -> {
+                findAll(req, resp);
+            }
+            case "findByUsername" -> {
+                findByUsername(req, resp);
+            }
+            case "findByBookName" -> {
+                findByBookName(req, resp);
+            }
+            case "borrow" -> {
+                borrow(req, resp);
+            }
         }
+
+    }
+
+        private void borrow(HttpServletRequest req, HttpServletResponse resp) {
+            SimpleDateFormat borrowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            req.setAttribute("records", recordService.add(Integer.parseInt(req.getParameter("b_id")), Integer.parseInt(req.getParameter("u_id")),borrowDate ));
+    }
+
+    private void findByBookName(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("records", recordService.findByBookName(req.getParameter("bookName")));
+    }
+
+    private void findByUsername(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("records", recordService.findByUsername(req.getParameter("username")));
+    }
+
+    private void findAll(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("records", recordService.findAll());
     }
 
     @Override

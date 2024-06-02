@@ -18,6 +18,7 @@ import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet("/book/*")
@@ -49,6 +50,23 @@ public class BookServlet extends HttpServlet {
             case "type" -> {
                 searchByTypeId(req, resp);
             }
+            case "borrow" -> {
+                borrowBook(req, resp);
+            }
+        }
+    }
+
+    private void borrowBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        resp.setContentType("text/html;charset=utf-8");
+        HttpSession session = req.getSession();
+        int b_id = Integer.parseInt(req.getParameter("b_id"));
+        System.out.println("b_id为:" + b_id);
+        boolean flag = bookService.borrow(b_id);
+        if (!flag) {
+            session.setAttribute("msg", "借书失败");
+        } else {
+            session.setAttribute("msg", "借书成功");
+            req.getRequestDispatcher("/record/borrow").forward(req, resp);
         }
     }
 
@@ -77,9 +95,8 @@ public class BookServlet extends HttpServlet {
 
     private void showBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
-//        resp.getWriter().write(bookService.findAll().toString());
         List<Book> list = bookService.findAll();
-        System.out.println(list);
+        list.forEach(System.out::println);
         req.setAttribute("bookList", list);
         req.getRequestDispatcher("/BookList.jsp").forward(req, resp);
     }

@@ -42,6 +42,7 @@
             <img class="img1" src="${book.cover}" alt="无法识别图片">
             <br>
             ${book.name}|库存：${book.count}本
+            <a href="<%request.getContextPath();%>/book/borrow?bookId=${book.b_id}">借阅</a>
         </span>
         </c:forEach>
     </div>

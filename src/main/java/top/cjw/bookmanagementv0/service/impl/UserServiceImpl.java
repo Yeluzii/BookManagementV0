@@ -2,13 +2,10 @@ package top.cjw.bookmanagementv0.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import top.cjw.bookmanagementv0.entity.User;
-import top.cjw.bookmanagementv0.exception.LoginException;
 //import top.cjw.bookmanagementv0.exception.RegisterException;
-import top.cjw.bookmanagementv0.exception.RegisterException;
 import top.cjw.bookmanagementv0.service.UserService;
 import top.cjw.bookmanagementv0.utils.MyBatisUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,9 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateUser(User user) {
+    public void updateUser(User user) {
             MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.UserMapper.update", user));
-        return true;
     }
 
 

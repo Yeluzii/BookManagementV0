@@ -21,7 +21,21 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByTypeId(int typeId) {
+    public List<Book> findByTypeId(Integer typeId) {
         return (List<Book>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<Book>selectList("top.cjw.bookmanagementv0.mapper.BookMapper.selectByTypeId", typeId));
     }
+
+    @Override
+    public Boolean borrow(Integer bookId) {
+        boolean flag = true;
+        Book book = (Book) MyBatisUtils.executeQuery(sqlSession -> sqlSession.<User>selectOne("top.cjw.bookmanagementv0.mapper.BookMapper.selectById", bookId));
+        if (book == null || book.getCount() == 0) {
+            flag = false;
+            return flag;
+        } else {
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.update", bookId));
+        }
+        return flag;
+    }
+
 }
