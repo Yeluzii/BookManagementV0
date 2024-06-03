@@ -20,19 +20,22 @@
         <id property="recordId" column="recordId"/>
         <result property="borrowDatetime" column="borrowDatetime"/>
         <association property="user" javaType="top.cjw.bookmanagementv0.entity.User">
-            <id property="username" column="username"/>
+            <id property="userId" column="userId"/>
+            <result property="username" column="username"/>
         </association>
         <association property="book" javaType="top.cjw.bookmanagementv0.entity.Book">
-            <id property="name" column="name"/>
+            <id property="bookId" column="bookId"/>
+            <result property="name" column="name"/>
         </association>
         <association property="type" javaType="top.cjw.bookmanagementv0.entity.Type">
-            <id property="typeName" column="typeName"/>
+            <id property="typeId" column="typeId"/>
+            <result property="typeName" column="typeName"/>
         </association>
     </resultMap>
 
 
 
-    <select id="selectByBookName" resultType="top.cjw.bookmanagementv0.entity.Record">
+    <select id="selectByBookName" resultMap="RecordResultMap">
         SELECT  recordId,username,name,typeName
         FROM record,user,book,type
         WHERE record.userId = user.userId
@@ -40,11 +43,25 @@
           AND book.typeId = type.typeId
           AND name like concat('%',#{name},'%')
     </select>
-    <select id="findBorrowTimesByUsernameAndBookNameSpecific" resultMap="RecordResultMap">
-        SELECT COUNT(*) AS borrowTimes
+
+    <select id="findBorrowTimesByUsernameAndBookIdSpecific" resultMap="RecordResultMap2">
+        SELECT recordId,r.bookId,username
         FROM record r
                  INNER JOIN user u ON r.userId = u.userId
                  INNER JOIN book b ON r.bookId = b.bookId
         WHERE u.username = #{username} AND r.bookId = #{bookId}
     </select>
+    <resultMap id="RecordResultMap2" type="top.cjw.bookmanagementv0.entity.Record">
+        <id property="recordId" column="recordId"/>
+        <result property="borrowDatetime" column="borrowDatetime"/>
+        <association property="user" javaType="top.cjw.bookmanagementv0.entity.User">
+            <id property="userId" column="userId"/>
+            <result property="username" column="username"/>
+        </association>
+        <association property="book" javaType="top.cjw.bookmanagementv0.entity.Book">
+            <id property="bookId" column="bookId"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
 </mapper>

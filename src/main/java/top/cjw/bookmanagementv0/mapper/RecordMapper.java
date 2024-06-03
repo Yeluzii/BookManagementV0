@@ -11,4 +11,6 @@ public interface RecordMapper {
     List<Record> selectByUsername(String username);
     List<Record> selectByBookName(String name);
     void add(Record record);
+
+    List<Record> findBorrowTimesByUsernameAndBookIdSpecific(String username, String bookId);
 }

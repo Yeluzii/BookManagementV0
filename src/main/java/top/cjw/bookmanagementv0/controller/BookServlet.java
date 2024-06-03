@@ -12,8 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import top.cjw.bookmanagementv0.entity.Book;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.BookService;
+import top.cjw.bookmanagementv0.service.RecordService;
 import top.cjw.bookmanagementv0.service.UserService;
 import top.cjw.bookmanagementv0.service.impl.BookServiceImpl;
+import top.cjw.bookmanagementv0.service.impl.RecordServiceImpl;
 import top.cjw.bookmanagementv0.service.impl.UserServiceImpl;
 import top.cjw.bookmanagementv0.utils.StringUtil;
 
@@ -25,10 +27,12 @@ import java.util.List;
 @Slf4j
 public class BookServlet extends HttpServlet {
     private BookService bookService;
+    private RecordService recordService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         bookService = new BookServiceImpl();
+        recordService = new RecordServiceImpl();
     }
 
     @Override
@@ -68,13 +72,25 @@ public class BookServlet extends HttpServlet {
     }
 
     private void borrowBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        if (!bookService.borrow(Integer.parseInt(req.getParameter("bId")))) {
-            req.setAttribute("msg3", "库存不足,借书失败！");
-            req.getRequestDispatcher("/book/selectAll").forward(req, resp);
-        } else {
+        HttpSession session = req.getSession();
+        String username = (String) session.getAttribute("username");
+        int bookId = Integer.parseInt(req.getParameter("bId"));
+        System.out.println("username:" + username + " bookId:" + bookId);
+        int borrowTime = recordService.findBorrowTimesByUsernameAndBookIdSpecific(username, bookId);
+        System.out.println(borrowTime);
+        if (borrowTime == 0){
+            if (!bookService.borrow(Integer.parseInt(req.getParameter("bId")))) {
+                req.setAttribute("msg3", "库存不足,借书失败！");
+                req.getRequestDispatcher("/book/selectAll").forward(req, resp);
+            } else {
 //            req.setAttribute("msg3", "借书成功");
-            req.getRequestDispatcher("/record/borrow").forward(req, resp);
+                req.getRequestDispatcher("/record/borrow").forward(req, resp);
+            }
+        }else {
+            req.setAttribute("msg3", "您已借过此书，不可重复借书！");
+            req.getRequestDispatcher("/book/selectAll").forward(req, resp);
         }
+
     }
 
     private void searchByTypeId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

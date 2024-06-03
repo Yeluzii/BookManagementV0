@@ -136,9 +136,9 @@ public class UserServlet extends HttpServlet{
             try {
                 Boolean flag = userService.register(user);
                 if (!flag){
-                    req.getSession().setAttribute("register","FAILED");
+                    req.getSession().setAttribute("msg2","注册失败");
                 }else {
-                    req.getSession().setAttribute("register","SUCCESS");
+                    req.getSession().setAttribute("msg2","注册成功");
                 }
                 log.info(String.valueOf(user));
                 user.setPassword(null);
@@ -174,10 +174,8 @@ public class UserServlet extends HttpServlet{
                 // 调用业务逻辑的登录功能
                 Boolean flag = userService.login(username, password);
                 if (flag){
-                    req.getSession().setAttribute("login","FAILED");
-//                    request.setAttribute("failMsg", "用户名或者密码错误，请重新登录！");
+                    req.getSession().setAttribute("msg1","用户名或者密码错误，请重新登录！");
                     req.getRequestDispatcher("/login.jsp").forward(req, resp);
-//                    resp.sendRedirect("/login.jsp");
                 }
                 log.info(String.valueOf(user));
                 // 将用户的密码置空，保护敏感数据

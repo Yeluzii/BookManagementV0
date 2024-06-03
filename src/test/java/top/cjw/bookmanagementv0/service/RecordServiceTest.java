@@ -36,4 +36,8 @@ class RecordServiceTest {
         records.forEach(System.out::println);
     }
 
+    @Test
+    void findBorrowTimesByUsernameAndBookIdSpecific() {
+        System.out.println(RecordService.findBorrowTimesByUsernameAndBookIdSpecific("1", 2));
+    }
 }

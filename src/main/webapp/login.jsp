@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /*background-image:url("/images/background.JPEG");*/
+            background-image:url("/images/background.JPEG");
             background-size:1600px 800px ;
         }
 
@@ -69,6 +69,9 @@
         div{
             margin-top: 150px;
         }
+        .alert {
+
+        }
     </style>
 </head>
 <body>
@@ -113,7 +116,7 @@
 <%--            <a href="" id="change">看不清，换一张</a>--%>
         </nav>
 
-            <button type="submit" >Login</button>
+            <button type="submit" onclick="loginMessage()">Login</button>
     </form>
 </section>
 
@@ -136,7 +139,7 @@
 <%--                <a href="" id="change">看不清，换一张</a>--%>
             </nav>
 
-            <button type="submit" >注册</button>
+            <button type="submit" onclick="messageWrong()">注册</button>
         </form>
     </section>
 
@@ -166,6 +169,13 @@
         document.getElementById("register").style.display = "none";
         document.getElementById("login").style.display = "block";
     }
+
+    window.onload = function loginMessage() {
+        <% if (request.getAttribute("msg1") != null) { %>
+        // 注意这里使用单引号来包围JavaScript字符串
+        alert('<%= request.getAttribute("msg1") %>');
+        <% } %>
+    };
 
 </script>
 

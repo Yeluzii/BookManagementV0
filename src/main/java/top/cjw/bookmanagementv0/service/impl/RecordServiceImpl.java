@@ -5,7 +5,9 @@ import top.cjw.bookmanagementv0.service.RecordService;
 import top.cjw.bookmanagementv0.utils.MyBatisUtils;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecordServiceImpl implements RecordService {
     @Override
@@ -32,6 +34,15 @@ public class RecordServiceImpl implements RecordService {
             MyBatisUtils.executeUpdate(sqlSession -> sqlSession.insert("top.cjw.bookmanagementv0.mapper.RecordMapper.add", record));
         }
         return flag;
+    }
+
+    @Override
+    public int findBorrowTimesByUsernameAndBookIdSpecific(String username, Integer bookId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        params.put("bookId", bookId);
+        List<Record> records = (List<Record>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.selectList("top.cjw.bookmanagementv0.mapper.RecordMapper.findBorrowTimesByUsernameAndBookIdSpecific", params));
+        return records.size();
     }
 
 }

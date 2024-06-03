@@ -9,4 +9,6 @@ public interface RecordService {
     List<Record> findByUsername(String username);
     List<Record> findByBookName(String bookName);
     Boolean add(Record record);
+
+    int findBorrowTimesByUsernameAndBookIdSpecific(String username, Integer bookId);
 }
