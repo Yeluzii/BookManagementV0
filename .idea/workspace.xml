@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="BookManagementV0:war" />
+      <artifact name="BookManagementV0:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5863dd52-97e0-455d-9816-5e855872933d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/admin_PersonalCenter.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/admin_findBookList.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/admin_findRecordList.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/admin_header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/BookServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/BookServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/RecordServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/RecordServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/UserServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/VerifyCodeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/controller/VerifyCodeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/exception/LoginException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/exception/RegisterException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/BookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/BookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/RecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/RecordMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/RecordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/BookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/RecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/RecordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/top/cjw/bookmanagementv0/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BookMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RecordMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/bookmanagement.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/bookmanagement.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/PersonalCenter.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/PersonalCenter.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin_BookList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin_BookList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin_RecordList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin_RecordList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin_UserList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin_UserList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin_bgManagement.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/user_BookList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/user_BookList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/user_RecordList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/user_RecordList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/BookServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/BookServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/RecordServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/RecordServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/top/cjw/bookmanagementv0/service/test1.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yeluzii&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yeluzii/BookManagementV0&quot;,
+    &quot;accountId&quot;: &quot;46b3ccd6-9254-4d4f-a2ba-4a2117c8eca3&quot;
+  }
+}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="D:\maven3.9.4" />
+        <option name="localRepository" value="D:\maven3.9.4\localMaven" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="userSettingsFile" value="D:\maven3.9.4\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="17" />
+        <option name="workspaceImportForciblyTurnedOn" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2hTxzRXb7QV07hlDobAMclfEeD3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JUnit.BookServiceTest.findAll.executor": "Run",
+    "JUnit.BookServiceTest.findByName.executor": "Run",
+    "JUnit.RecordServiceTest.findByBookName.executor": "Run",
+    "JUnit.UserServiceTest.findByPartUserName.executor": "Run",
+    "JUnit.UserServiceTest.updateAvatar.executor": "Run",
+    "Maven.BookManagementV0 [clean].executor": "Run",
+    "Maven.BookManagementV0 [install].executor": "Run",
+    "Maven.BookManagementV0 [package].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.Tomcat 10.1.13.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "yeluzi5.1",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/yeluzi/Desktop/111大二下实训/BookManagement-Final",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yeluzi\Desktop\111大二下实训\BookManagementV10\src\main\resources\sql" />
+      <recent name="C:\Users\why16\Desktop\实训（大二下）\BookManagementV10\src\main\webapp\images" />
+      <recent name="C:\Users\why16\Desktop\实训（大二下）\BookManagementV10\src\main\webapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\why16\Desktop\实训（大二下）\BookManagementV10\src\main\webapp\images" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="top.cjw.bookmanagementv0.service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.13">
+    <configuration name="BookServiceTest.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BookManagement-Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.cjw.bookmanagementv0.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="top.cjw.bookmanagementv0.service" />
+      <option name="MAIN_CLASS_NAME" value="top.cjw.bookmanagementv0.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="findAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.findByName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BookManagement-Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.cjw.bookmanagementv0.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="top.cjw.bookmanagementv0.service" />
+      <option name="MAIN_CLASS_NAME" value="top.cjw.bookmanagementv0.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="findByName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RecordServiceTest.findByBookName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BookManagement-Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.cjw.bookmanagementv0.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="top.cjw.bookmanagementv0.service" />
+      <option name="MAIN_CLASS_NAME" value="top.cjw.bookmanagementv0.service.RecordServiceTest" />
+      <option name="METHOD_NAME" value="findByBookName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.findByPartUserName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BookManagement-Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.cjw.bookmanagementv0.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="top.cjw.bookmanagementv0.service" />
+      <option name="MAIN_CLASS_NAME" value="top.cjw.bookmanagementv0.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="findByPartUserName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.updateAvatar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="BookManagement-Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.cjw.bookmanagementv0.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="top.cjw.bookmanagementv0.service" />
+      <option name="MAIN_CLASS_NAME" value="top.cjw.bookmanagementv0.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="updateAvatar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="BookManagement-Final" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="BookManagement-Final" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 10.1.13" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.13" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="BookManagementV0:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="4a08573f-4151-4315-a215-e9f1fcddeaa8" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="50638" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="BookManagementV0:war" />
+          <artifact name="BookManagementV0:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BookServiceTest.findAll" />
+        <item itemvalue="JUnit.BookServiceTest.findByName" />
+        <item itemvalue="JUnit.RecordServiceTest.findByBookName" />
+        <item itemvalue="JUnit.UserServiceTest.findByPartUserName" />
+        <item itemvalue="JUnit.UserServiceTest.updateAvatar" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5863dd52-97e0-455d-9816-5e855872933d" name="Changes" comment="" />
+      <created>1717632130966</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717632130966</updated>
+      <workItem from="1717632132047" duration="14267000" />
+      <workItem from="1717649456726" duration="7562000" />
+      <workItem from="1717661059166" duration="18000" />
+      <workItem from="1717661099836" duration="6830000" />
+      <workItem from="1717669153561" duration="16768000" />
+      <workItem from="1717688272946" duration="42000" />
+      <workItem from="1717690603806" duration="330000" />
+      <workItem from="1717690965438" duration="14000" />
+      <workItem from="1717982743763" duration="3977000" />
+      <workItem from="1718064676962" duration="8943000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

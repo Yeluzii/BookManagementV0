@@ -7,8 +7,9 @@ import java.util.List;
 public interface RecordService {
     List<Record> findAll();
     List<Record> findByUsername(String username);
+//    List<Record> findByPartBookName(String bookName);
     List<Record> findByBookName(String bookName);
     Boolean add(Record record);
-
-    int findBorrowTimesByUsernameAndBookIdSpecific(String username, Integer bookId);
+    Boolean returnBook(Record record);
+    List<Record> findReturnTimeByUsernameAndBookIdSpecific(String username, Integer bookId);
 }

@@ -9,8 +9,9 @@ import java.util.List;
 public interface RecordMapper {
     List<Record> selectAll();
     List<Record> selectByUsername(String username);
+    List<Record> selectByPartBookName(String name);
     List<Record> selectByBookName(String name);
     void add(Record record);
-
-    List<Record> findBorrowTimesByUsernameAndBookIdSpecific(String username, String bookId);
+    void update(Integer recordId);//还书
+    List<Record> findReturnTimeByUsernameAndBookIdSpecific(String username, String bookId);
 }

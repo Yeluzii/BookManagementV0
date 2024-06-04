@@ -25,6 +25,9 @@ public class VerifyCodeServlet extends HttpServlet {
         int height = 50;
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
+
+        Font font = new Font("Cascadia Mono", Font.PLAIN, 24);
+
         g.setColor(Color.white);
         g.fillRect(0, 0, -1, -1);
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -34,9 +37,11 @@ public class VerifyCodeServlet extends HttpServlet {
         for (int i = 1; i < 5; i++) {
             int index = ran.nextInt(str.length());
             ch = str.charAt(index);
-            g.drawString(ch + "", width / 5 * i, height / 3);
+            // 使用新创建的字体绘制字符串
+            g.setFont(font);
+            g.drawString(ch + "", width / 5 * i, height / 2);
             char[] res = new char[]{ch};
-            for (int x = 0;x< res.length;x++){
+            for (int x = 0; x < res.length; x++) {
                 result = result.concat(res[x] + "");
             }
         }
@@ -56,6 +61,5 @@ public class VerifyCodeServlet extends HttpServlet {
         System.out.println(result);
         req.getSession().setAttribute("verifyCode", result);
     }
-
 
 }

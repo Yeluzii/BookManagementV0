@@ -8,6 +8,19 @@
         update user set password = #{password}
         WHERE username = #{username}
     </update>
+    <update id="updateIsAdminByUserName">
+        update user set isAdmin = #{isAdmin}
+        WHERE username = #{username}
+    </update>
+    <update id="updateAvatar">
+        update user set avatar = #{avatar}
+        WHERE username = #{username}
+    </update>
+    <delete id="deleteUser">
+        DELETE
+        FROM user
+        WHERE userId = #{userId}
+    </delete>
     <select id="selectByUserName" parameterType="String" resultType="top.cjw.bookmanagementv0.entity.User">
         SELECT *
         FROM user
@@ -16,5 +29,15 @@
     <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.User">
         SELECT *
         FROM user
+    </select>
+    <select id="selectIsAdminByUserName" resultType="top.cjw.bookmanagementv0.entity.User">
+        SELECT isAdmin
+        FROM user
+        WHERE username = #{username}
+    </select>
+    <select id="selectByPartUserName" resultType="top.cjw.bookmanagementv0.entity.User">
+        SELECT *
+        FROM user
+        WHERE username like concat('%', #{username}, '%')
     </select>
 </mapper>

@@ -5,21 +5,15 @@
     <script src="./js/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网上图书商城的设计与开发</title>
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="./css/dynamicBackground.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image:url("/images/background.JPEG");
-            background-size:1600px 800px ;
-        }
-
-        header {
-            padding: 15px;
-            text-align: center;
-            /*background-color: #333;*/
-            /*color: #fff;*/
+            background-image: url("/images/background.JPEG");
+            background-size: cover;
         }
 
         nav {
@@ -39,8 +33,8 @@
             background-color: #aca9bb;
             padding: 20px;
             border-radius: 5px;
-            /*box-shadow: 0 0 10px rgba(0, 0, 0, 0);*/
-            opacity: 0.5;
+            opacity: 0.7;
+            box-shadow: 5px 5px 5px rgba(20, 173, 239, 0.75);
         }
 
         input {
@@ -66,64 +60,59 @@
             background-color: #555;
         }
 
-        div{
+        div {
             margin-top: 150px;
         }
-        .alert {
 
+        .h1{
+            text-align: center;
+            color: bisque;
         }
+        #login a,#register a{
+            text-decoration: none;
+        }
+        #login a:hover,#register a:hover {
+            color: #fff43c;
+        }
+
     </style>
 </head>
 <body>
 
+<canvas></canvas>
+<script src="./js/dynamicBackground.js"></script>
 <div>
-<header>
-    <h1>图书管理系统</h1>
-</header>
+        <h1 class="h1">图书管理系统</h1>
 
+    <section id="login">
 
-<section id="login" >
-<%--    <%=session.getAttribute("login")%>--%>
-<%--    <%=session.getAttribute("register")%>--%>
+        <form id="loginForm" action="<%request.getContextPath();%>/user/login" method="post">
+            <h2>Login</h2>
+            <label for="loginUsername">Username:</label><input type="text" id="loginUsername" name="loginUsername"
+                                                               required>
 
-<c:if test="${not empty msg}">
-    <div id="message">${msg}</div>
-    <script>
-        // 简单示例，显示消息后延迟隐藏
-        window.onload = function() {
-            var messageElement = document.getElementById('message');
-            if (messageElement.innerText) {
-                setTimeout(function() {
-                    messageElement.style.display = 'none';
-                }, 5000); // 5秒后自动隐藏
-            }
-        };
-    </script>
-</c:if>
+            <label for="loginPassword">Password:</label><input type="password" id="loginPassword" name="loginPassword"
+                                                               required>
 
-    <form id="loginForm" action="<%request.getContextPath();%>/user/login" method="post">
-        <h2>Login</h2>
-        <label for="loginUsername">Username:</label><input type="text" id="loginUsername" name="loginUsername" required>
+            <nav>
+                <a href="#" onclick="showRegister()">未拥有账号，去注册</a>
 
-        <label for="loginPassword">Password:</label><input type="password" id="loginPassword" name="loginPassword" required>
+                <label>
+                    <input id="verifyCode1" name="verifyCode" type="text" placeholder="输入验证码（区分大小写）" required>
+                </label>
+                <img src="${pageContext.request.contextPath}/verifyCode" alt="验证码" id="code1">
+                <a href="" id="change1">看不清，换一张</a>
 
-        <nav>
-            <a href="#" onclick="showRegister()">未拥有账号，去注册</a>
-<%--            <label>--%>
-<%--                <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
-<%--            </label>--%>
-<%--            <img src="/verifyCode" alt="验证码" id="code">--%>
-<%--            <a href="" id="change">看不清，换一张</a>--%>
-        </nav>
+            </nav>
 
             <button type="submit" onclick="loginMessage()">Login</button>
-    </form>
-</section>
+        </form>
+    </section>
 
     <section id="register" style="display:none;">
 
         <form id="registerForm" action="<%request.getContextPath();%>/user/register" method="post">
-            <h2>注册</h2>
+            <h2>Register</h2>
             <label for="regUsername">Username:</label>
             <input type="text" id="regUsername" name="regUsername" required>
 
@@ -132,30 +121,18 @@
 
             <nav>
                 <a href="#" onclick="showLogin()">注册完成，去登录</a>
-<%--                <label>--%>
-<%--                    <input id="verifyCode" name="verifyCode" type="text" placeholder="输入验证码">--%>
-<%--                </label>--%>
-<%--                <img src="/verifyCode" alt="验证码" id="code">--%>
-<%--                <a href="" id="change">看不清，换一张</a>--%>
+
+                <label>
+                    <input id="verifyCode2" name="verifyCode" type="text" placeholder="输入验证码（区分大小写）" required>
+                </label>
+                <img src="${pageContext.request.contextPath}/verifyCode" alt="验证码" id="code2">
+                <a href="" id="change2">看不清，换一张</a>
+
             </nav>
 
-            <button type="submit" onclick="messageWrong()">注册</button>
+            <button type="submit" onclick="messageWrong()">Register</button>
         </form>
     </section>
-
-    <script>
-        window.onload = function () {
-            //  获取图片对象
-            let img = document.getElementById("code");
-            //  获取超链接对象
-            let href = document.getElementById("change");
-            href.onclick = function () {
-                //  加时间戳
-                const date = new Date().getTime();
-                img.src = "verify-code?" + date;
-            }
-        }
-    </script>
 
 </div>
 
@@ -170,13 +147,52 @@
         document.getElementById("login").style.display = "block";
     }
 
-    window.onload = function loginMessage() {
-        <% if (request.getAttribute("msg1") != null) { %>
-        // 注意这里使用单引号来包围JavaScript字符串
-        alert('<%= request.getAttribute("msg1") %>');
-        <% } %>
-    };
+</script>
 
+<%--验证码--%>
+<script>
+    window.onload = function () {
+        //  获取图片对象
+        let img1 = document.getElementById("code1");
+        //  获取超链接对象
+        let href1 = document.getElementById("change1");
+        href1.onclick = function () {
+            //  加时间戳
+            const date = new Date().getTime();
+            img1.src = "verify-code?" + date;
+        }
+
+        //  获取图片对象
+        let img2 = document.getElementById("code2");
+        //  获取超链接对象
+        let href2 = document.getElementById("change2");
+        href2.onclick = function () {
+            //  加时间戳
+            const date = new Date().getTime();
+            img2.src = "verify-code?" + date;
+        }
+
+        <%--验证码错误弹窗--%>
+        <% if (session.getAttribute("codeError") != null) { %>
+        alert('<%= session.getAttribute("codeError") %>');
+        <%session.setAttribute("codeError", null);%>
+        <%}%>
+        <%--登录失败弹窗--%>
+        <% if (request.getSession().getAttribute("msg1") != null) { %>
+        alert('<%= request.getSession().getAttribute("msg1") %>');
+        <%session.setAttribute("msg1", null);%>
+        <%}%>
+        <%--注册成功失败弹窗--%>
+        <% if (request.getSession().getAttribute("msg2") != null) { %>
+        alert('<%= request.getSession().getAttribute("msg2") %>');
+        <%session.setAttribute("msg2", null);%>
+        <%}%>
+        <%--修改密码成功弹窗--%>
+        <% if (request.getSession().getAttribute("msg") != null) { %>
+        alert('<%= request.getSession().getAttribute("msg") %>');
+        <%session.setAttribute("msg", null);%>
+        <%}%>
+    }
 </script>
 
 </body>

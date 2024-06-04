@@ -2,14 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.cjw.bookmanagementv0.mapper.RecordMapper">
     <insert id="add" parameterType="top.cjw.bookmanagementv0.entity.Record">
-        insert into record(bookId,userId,borrowDatetime) value (#{bookId}, #{userId}, #{borrowDatetime})
+        insert into record(bookId, userId, borrowDatetime) value (#{bookId}, #{userId}, #{borrowDatetime})
     </insert>
-    <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.Record">
-        SELECT  *
-        FROM record
+    <update id="update">
+        update record
+        set returnDatetime = #{returnDatetime}
+        WHERE recordId = #{recordId}
+    </update>
+
+    <select id="selectAll" resultMap="RecordResultMap">
+        SELECT r.recordId,r.bookId, u.username, b.name, t.typeName, r.borrowDatetime,r.returnDatetime
+        FROM record r
+                 INNER JOIN user u ON r.userId = u.userId
+                 INNER JOIN book b ON r.bookId = b.bookId
+                 INNER JOIN type t ON b.typeId = t.typeId
     </select>
-    <select id="selectByUsername"  resultMap="RecordResultMap">
-        SELECT r.recordId, u.username, b.name, t.typeName, r.borrowDatetime
+    <select id="selectByUsername" resultMap="RecordResultMap">
+        SELECT r.recordId,r.bookId, u.username, b.name, t.typeName, r.borrowDatetime,r.returnDatetime
         FROM record r
                  INNER JOIN user u ON r.userId = u.userId
                  INNER JOIN book b ON r.bookId = b.bookId
@@ -19,6 +28,7 @@
     <resultMap id="RecordResultMap" type="top.cjw.bookmanagementv0.entity.Record">
         <id property="recordId" column="recordId"/>
         <result property="borrowDatetime" column="borrowDatetime"/>
+        <result property="returnDatetime" column="returnDatetime"/>
         <association property="user" javaType="top.cjw.bookmanagementv0.entity.User">
             <id property="userId" column="userId"/>
             <result property="username" column="username"/>
@@ -34,26 +44,34 @@
     </resultMap>
 
 
-
-    <select id="selectByBookName" resultMap="RecordResultMap">
-        SELECT  recordId,username,name,typeName
-        FROM record,user,book,type
-        WHERE record.userId = user.userId
-          AND record.bookId = book.bookId
-          AND book.typeId = type.typeId
-          AND name like concat('%',#{name},'%')
-    </select>
-
-    <select id="findBorrowTimesByUsernameAndBookIdSpecific" resultMap="RecordResultMap2">
-        SELECT recordId,r.bookId,username
+    <select id="selectByPartBookName" resultMap="RecordResultMap">
+        SELECT r.recordId,r.bookId, u.username, b.name, t.typeName, r.borrowDatetime,r.returnDatetime
         FROM record r
                  INNER JOIN user u ON r.userId = u.userId
                  INNER JOIN book b ON r.bookId = b.bookId
-        WHERE u.username = #{username} AND r.bookId = #{bookId}
+                 INNER JOIN type t ON b.typeId = t.typeId
+          WHERE b.name like concat('%', #{name}, '%')
+    </select>
+
+    <select id="findReturnTimeByUsernameAndBookIdSpecific" resultMap="RecordResultMap2">
+        SELECT recordId, r.bookId, username, returnDatetime
+        FROM record r
+                 INNER JOIN user u ON r.userId = u.userId
+                 INNER JOIN book b ON r.bookId = b.bookId
+        WHERE u.username = #{username}
+          AND r.bookId = #{bookId}
+    </select>
+    <select id="selectByBookName" resultMap="RecordResultMap">
+        SELECT r.recordId,r.bookId, u.username, b.name, t.typeName, r.borrowDatetime,r.returnDatetime
+        FROM record r
+                 INNER JOIN user u ON r.userId = u.userId
+                 INNER JOIN book b ON r.bookId = b.bookId
+                 INNER JOIN type t ON b.typeId = t.typeId
+        WHERE b.name = #{name}
     </select>
     <resultMap id="RecordResultMap2" type="top.cjw.bookmanagementv0.entity.Record">
         <id property="recordId" column="recordId"/>
-        <result property="borrowDatetime" column="borrowDatetime"/>
+        <result property="returnDatetime" column="returnDatetime"/>
         <association property="user" javaType="top.cjw.bookmanagementv0.entity.User">
             <id property="userId" column="userId"/>
             <result property="username" column="username"/>

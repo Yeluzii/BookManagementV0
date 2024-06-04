@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.cjw.bookmanagementv0.mapper.BookMapper">
-    <update id="updateCount">
-        update book set count = count - 1
+    <insert id="increaseCount">
+        update book
+        set count = count + 1
+        WHERE bookId = #{bookId}
+    </insert>
+    <insert id="add">
+        insert into book(name, typeId, count, cover) value (#{name}, #{typeId}, #{count}, #{cover})
+    </insert>
+    <update id="decreaseCount">
+        update book
+        set count = count - 1
+        WHERE bookId = #{bookId}
+    </update>
+    <update id="update">
+        update book
+        SET name   = #{name},
+            typeId = #{typeId},
+            count  = #{count},
+            cover = #{cover}
         WHERE  bookId = #{bookId}
     </update>
+    <delete id="delete">
+        DELETE
+        FROM book
+        WHERE bookId = #{bookId}
+    </delete>
 
     <select id="selectAll" resultType="top.cjw.bookmanagementv0.entity.Book">
         SELECT *
@@ -13,7 +35,7 @@
     <select id="selectByName" resultType="top.cjw.bookmanagementv0.entity.Book">
         SELECT *
         FROM book
-        WHERE name like concat('%',#{name},'%');
+        WHERE name like concat('%', #{name}, '%');
     </select>
     <select id="selectByTypeId" resultType="top.cjw.bookmanagementv0.entity.Book">
         SELECT *

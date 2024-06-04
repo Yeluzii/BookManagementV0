@@ -9,5 +9,10 @@ public interface UserService {
     Boolean login(String username, String password);
     Boolean register(User user);
     User userInfo(String username);
+    List<User> findByPartUserName(String username);
     void updateUser(User user);
+    void updateAvatar(User user);
+    Boolean deleteUser(Integer userId);
+    Boolean selectIsAdminByUserName(String username);
+    Boolean updateIsAdminByUserName(String username,Byte isAdmin);
 }
