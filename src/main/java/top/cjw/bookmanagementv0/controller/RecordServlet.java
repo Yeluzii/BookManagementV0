@@ -53,8 +53,31 @@ public class RecordServlet extends HttpServlet {
             case "borrow" -> {
                 borrow(req, resp);
             }
+            case "returnBook" -> {
+                returnBook(req, resp);
+            }
         }
 
+    }
+
+    private void returnBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String bookId = req.getParameter("bId");
+        System.out.println(bookId);
+        User user = (User) req.getSession().getAttribute("user");
+        Record record = Record.builder()
+                .bookId(Integer.valueOf(bookId))
+                .user(user)
+                .build();
+        Boolean flag = recordService.returnBook(record);
+        if (flag) {
+            System.out.println("还书成功！");
+            req.setAttribute("msg3", "还书成功！");
+            req.getRequestDispatcher("/record/findByUsername").forward(req, resp);
+        } else {
+            System.out.println("还书失败！");
+            req.setAttribute("msg3", "还书失败！");
+            req.getRequestDispatcher("/record/findByUsername").forward(req, resp);
+        }
     }
 
     private void borrow(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,7 +92,7 @@ public class RecordServlet extends HttpServlet {
             req.setAttribute("msg3", "借书成功！");
             req.getRequestDispatcher("/book/selectAll").forward(req, resp);
         } else {
-            req.setAttribute("msg3", "借书失败！");
+            req.setAttribute("msg3", "借书失败！借阅记录未添加成功！");
             req.getRequestDispatcher("/book/selectAll").forward(req, resp);
         }
     }
@@ -83,9 +106,9 @@ public class RecordServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         List<Record> records = recordService.findByUsername(user.getUsername());
         System.out.println("用户名:" + user.getUsername());
-        System.out.println("纪录为:" + records);
+        System.out.println("当前纪录为:" + records);
         req.setAttribute("recordList", records);
-        req.setAttribute("username", "小王");
+        req.setAttribute("username", user.getUsername());
         req.getRequestDispatcher("/user_RecordList.jsp").forward(req, resp);
     }
 
@@ -93,7 +116,7 @@ public class RecordServlet extends HttpServlet {
         HttpSession session = req.getSession();
         List<Record> records = recordService.findAll();
         session.setAttribute("recordList", records);
-        System.out.println("记录为:" + records);
+        System.out.println("所有记录为:" + records);
         req.getRequestDispatcher("/admin_RecordList.jsp").forward(req, resp);
     }
 

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import top.cjw.bookmanagementv0.entity.Book;
+import top.cjw.bookmanagementv0.entity.Record;
 import top.cjw.bookmanagementv0.entity.User;
 import top.cjw.bookmanagementv0.service.BookService;
 import top.cjw.bookmanagementv0.service.RecordService;
@@ -58,9 +59,25 @@ public class BookServlet extends HttpServlet {
             case "borrow" -> {
                 borrowBook(req, resp);
             }
+            case "returnBook" -> {
+                returnBook(req, resp);
+            }
             case "adminAllBook" -> {
                 adminAllBook(req, resp);
             }
+        }
+    }
+
+    private void returnBook(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        Integer bId = Integer.parseInt(req.getParameter("bId"));
+        boolean flag = bookService.returnBook(bId);
+        if (flag) {
+            System.out.println("success");
+            req.getRequestDispatcher("/record/returnBook").forward(req, resp);
+        } else {
+            System.out.println("fail");
+            req.setAttribute("msg4", "还书失败！库存数量未正常添加！");
+            req.getRequestDispatcher("/record/findAll").forward(req, resp);
         }
     }
 
@@ -71,23 +88,25 @@ public class BookServlet extends HttpServlet {
         req.getRequestDispatcher("/admin_BookList.jsp").forward(req, resp);
     }
 
-    private void borrowBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    private void borrowBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String username = (String) session.getAttribute("username");
         int bookId = Integer.parseInt(req.getParameter("bId"));
         System.out.println("username:" + username + " bookId:" + bookId);
-        int borrowTime = recordService.findBorrowTimesByUsernameAndBookIdSpecific(username, bookId);
-        System.out.println(borrowTime);
-        if (borrowTime == 0){
+        List<Record> records = recordService.findReturnTimeByUsernameAndBookIdSpecific(username, bookId);
+        String returnTime = null;
+        for (Record record : records) {
+            returnTime = String.valueOf(record.getReturnDatetime());
+        }
+        if (returnTime != null) {
             if (!bookService.borrow(Integer.parseInt(req.getParameter("bId")))) {
                 req.setAttribute("msg3", "库存不足,借书失败！");
                 req.getRequestDispatcher("/book/selectAll").forward(req, resp);
             } else {
-//            req.setAttribute("msg3", "借书成功");
                 req.getRequestDispatcher("/record/borrow").forward(req, resp);
             }
-        }else {
-            req.setAttribute("msg3", "您已借过此书，不可重复借书！");
+        } else {
+            req.setAttribute("msg3", "您已借过此书仍未还，不可重复借书！");
             req.getRequestDispatcher("/book/selectAll").forward(req, resp);
         }
 

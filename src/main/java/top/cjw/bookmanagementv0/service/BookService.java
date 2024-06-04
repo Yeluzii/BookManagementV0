@@ -9,4 +9,5 @@ public interface BookService {
     List<Book> findByName(String name);
     List<Book> findByTypeId(Integer tId);
     Boolean borrow(Integer bId);
+    Boolean returnBook(Integer bId);
 }

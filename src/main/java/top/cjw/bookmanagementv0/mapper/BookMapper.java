@@ -9,5 +9,6 @@ public interface BookMapper {
     List<Book> selectByName(String name);
     List<Book> selectByTypeId(Integer tId);
     Book selectById(Integer bId);
-    void updateCount(Integer bId);
+    void decreaseCount(Integer bId);
+    void increaseCount(Integer bId);
 }

@@ -28,4 +28,10 @@ class BookServiceTest {
         BookService bookService = new BookServiceImpl();
         System.out.println(bookService.borrow(1));
     }
+
+    @Test
+    void returnBook() {
+        BookService bookService = new BookServiceImpl();
+        System.out.println(bookService.returnBook(1));
+    }
 }

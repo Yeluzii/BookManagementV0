@@ -37,7 +37,13 @@ class RecordServiceTest {
     }
 
     @Test
-    void findBorrowTimesByUsernameAndBookIdSpecific() {
-        System.out.println(RecordService.findBorrowTimesByUsernameAndBookIdSpecific("1", 2));
+    void findReturnTimeByUsernameAndBookIdSpecific() {
+        System.out.println(RecordService.findReturnTimeByUsernameAndBookIdSpecific("1", 1));
+    }
+
+    @Test
+    void returnBook() {
+        Record record = new Record(null, 1, null,null, null,new User(null, "1", null, null, null),null,null);
+        System.out.println(RecordService.returnBook(record));
     }
 }

@@ -22,7 +22,8 @@
             ${record.user.username}
             ${record.book.name}
             ${record.borrowDatetime}
-<%--            <a href="<%request.getContextPath();%>/record/return-book?recordId=${record.r_id}">归还</a>--%>
+            ${record.returnDatetime}
+                <a href="<%request.getContextPath();%>/book/returnBook?bId=${record.book.bookId}">归还</a>
         </span>
     </c:forEach>
 </div>

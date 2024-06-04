@@ -31,9 +31,20 @@ public class BookServiceImpl implements BookService {
         Book book = (Book) MyBatisUtils.executeQuery(sqlSession -> sqlSession.selectOne("top.cjw.bookmanagementv0.mapper.BookMapper.selectById", bId));
         if (book == null || book.getCount() == 0) {
             flag = false;
-            return flag;
         } else {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.updateCount", bId));
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.decreaseCount", bId));
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean returnBook(Integer bId) {
+        boolean flag = true;
+        Book book = (Book) MyBatisUtils.executeQuery(sqlSession -> sqlSession.selectOne("top.cjw.bookmanagementv0.mapper.BookMapper.selectById", bId));
+        if (book == null) {
+            flag = false;
+        } else {
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.update("top.cjw.bookmanagementv0.mapper.BookMapper.increaseCount", bId));
         }
         return flag;
     }
